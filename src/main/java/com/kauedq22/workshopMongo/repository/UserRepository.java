@@ -9,6 +9,4 @@ import com.kauedq22.workshopMongo.models.User;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
-
-    
 }
