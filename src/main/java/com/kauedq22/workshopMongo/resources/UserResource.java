@@ -2,12 +2,14 @@ package com.kauedq22.workshopMongo.resources;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kauedq22.workshopMongo.dto.UserDTO;
 import com.kauedq22.workshopMongo.models.User;
 import com.kauedq22.workshopMongo.service.UserService;
 
@@ -23,9 +25,10 @@ public class UserResource{
    private UserService service;
 
     @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll(){ 
+    public ResponseEntity<List<UserDTO>> findAll(){ 
         List<User> list = service.findAll();
-        return ResponseEntity.ok().body(list);    
+        List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);    
     }
 
 }
