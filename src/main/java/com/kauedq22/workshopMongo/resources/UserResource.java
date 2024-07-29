@@ -17,6 +17,7 @@ import com.kauedq22.workshopMongo.models.User;
 import com.kauedq22.workshopMongo.service.UserService;
 
 import org.springframework.web.bind.annotation.RequestMethod;
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource{
@@ -51,5 +52,15 @@ public class UserResource{
        service.delete(id);
        return ResponseEntity.noContent().build();  
    }
+
+   @RequestMapping(value = "/{id}", method=RequestMethod.PUT)
+   public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
+    User obj = service.fromDTO(objDto);
+    obj.setId(id);
+    obj = service.update(obj);
+    return ResponseEntity.noContent().build();
+    
+   }
+   
 
 }
