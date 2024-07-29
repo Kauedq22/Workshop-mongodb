@@ -1,6 +1,7 @@
 package com.kauedq22.workshopMongo.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,13 +11,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Document
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class User implements Serializable {
-
+public class Post implements Serializable {
     @Id
-    private String id;
-    private String name;
-    private String email;
+	private String id;
+	private Date date;
+	private String title;
+	private String body;
+	private User author;
 }
